@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, ref } from "vue";
+import { ref } from "vue";
 import EventList from "@/components/EventList.vue";
 
 const props = defineProps({
@@ -19,5 +19,7 @@ const props = defineProps({
   },
 });
 
-const eventExists = ref(true);
+const eventExists = ref(
+  props.tab !== "following"
+);
 </script>
