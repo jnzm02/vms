@@ -1,5 +1,4 @@
 <template>
-  Auth Layout
   <router-view />
 </template>
 

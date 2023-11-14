@@ -14,7 +14,7 @@ const eventList = [
     date: "2021-10-01",
     time: "12:00",
     location: "Case Club",
-    description: "Case Club Event",
+    description: "Sherkhan's Birthday Party",
   },
 {
     id: 2,
