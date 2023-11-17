@@ -1,7 +1,18 @@
+<script lang="ts" setup>
+</script>
+
 <template>
-  <div class="text-[72px]">BLANK PAGE</div>
+  <div class="art">
+    <router-view />
+  </div>
 </template>
 
-<script lang="ts" setup>
-
-</script>
+<style>
+.art {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

@@ -1,5 +1,4 @@
 <template>
-  <div class="flex flex-column h-full">
 <!--    <nav>-->
 <!--      <v-tabs v-model="tab" class="bg-semi-light h-full" fixed-tabs>-->
 <!--        <v-tab :ripple="false" value="following" class="text-none">Following</v-tab>-->
@@ -12,12 +11,8 @@
 <!--      <window-item tab="club" />-->
 <!--      <window-item tab="open" />-->
 <!--    </v-window>-->
-  </div>
+    asd
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import WindowItem from "@/components/WindowItem.vue";
-
-const tab = ref('open');
 </script>

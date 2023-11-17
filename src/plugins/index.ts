@@ -15,13 +15,7 @@ import generatedRoutes from 'virtual:generated-pages'
 
 const modifiedRoutes = generatedRoutes.map((route: any) => {
   route.meta = route.meta || {}
-  if (route.path === '/') {
-    route.meta.layout = 'default'
-  } else if (route.path.startsWith('/auth')) {
-    route.meta.layout = 'auth'
-  } else {
-    route.meta.layout = 'blank'
-  }
+  route.meta.layout = 'blank'
   return route
 });
 
