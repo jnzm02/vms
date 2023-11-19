@@ -11,13 +11,12 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="grid grid-cols-5 px-[24px] w-full justify-between align-center p-2">
+  <div class="grid grid-cols-4 px-[24px] mx-auto w-[80%] justify-between align-center p-2 cursor-pointer">
     <div class="flex gap-[4px]"><img src="@/assets/driver-photo.svg" alt="driver">
     <div>{{ driverData.name }}</div></div>
     <div>{{ driverData.lastname }}</div>
     <div>{{ driverData.email }}</div>
     <div class="justify-end flex">{{ driverData.phone }}</div>
-    <div class="flex justify-end p-2"><button class="flex">Edit <img src="@/assets/arrow.svg" alt="arrow"></button></div>
   </div>
 </template>
 
