@@ -57,7 +57,7 @@ const createNewDriver = () => {
         <input type="text" placeholder="Search Maintenance Person">
         <button class="border-[1px] p-[2px]">Search</button>
       </div>
-      <div class="rounded-[12px] mt-[100px]">
+      <div class="rounded-[12px]">
         <div class="flex justify-space-between align-center">
           <div class="text-[24px] my-4 rounded-4">Maintenance Personnel List</div>
           <div @click="createNewDriver" class="font-bold bg-[black] text-[white] py-2 px-4 cursor-pointer rounded-[10px]">+ Add New Maintenance Person</div>

@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 const props = defineProps<{
-  driverData: {
+  routeData: {
+    driverId: number,
     name: string,
-    mark: string,
-    color: string
+    description: string,
+    status: string,
+    start_position: string,
+    end_position: string
   }
 }>()
 
@@ -13,9 +16,11 @@ const props = defineProps<{
   <div class="grid grid-cols rounded-[20px] px-[24px] w-full justify-between align-center p-2">
     <div class="flex flex-col gap-[4px]">
       <img src="@/assets/car.png" class='bg-transparent' alt="car">
-      <div>{{ driverData.name }}</div>
-      <div>{{ driverData.mark }}</div>
-      <div>{{ driverData.color }}</div>
+      <div>{{ routeData.name }}</div>
+      <div>{{ routeData.description }}</div>
+      <div>{{ routeData.status }}</div>
+      <div>{{ routeData.start_position }}</div>
+      <div>{{ routeData.end_position }}</div>
     </div>
   </div>
 </template>

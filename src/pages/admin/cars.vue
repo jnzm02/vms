@@ -48,12 +48,6 @@ const cars = [
         <div class="text-[24px] my-4 rounded-4">Cars List</div>
         <div>
         </div>
-        <div class="grid grid-cols-5 px-[24px] w-full justify-between align-center font-bold p-2">
-          <div>Firstname</div>
-          <div>Lastname</div>
-          <div>Email</div>
-          <div class="justify-end flex">Phone</div>
-        </div>
         <div class="grid grid-cols-3 gap-[20px]">
           <div v-for="car in cars" :key="car.id">
             <car-item class="bg-[#eff]" :class="{ 'bg-[#fef]': car.id % 2 === 0 }" :driver-data="car.data" />

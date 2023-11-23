@@ -60,21 +60,21 @@ const createNewDriver = () => {
         <input type="text" placeholder="Search for Drivers">
         <button class="border-[1px] p-[2px]">Search</button>
       </div>
-      <div class="rounded-[12px] mt-[100px]">
+      <div class="rounded-[12px]">
         <div class="flex justify-space-between align-center">
           <div class="text-[24px] my-4 rounded-4">Drivers List</div>
           <div @click="createNewDriver" class="font-bold bg-[black] text-[white] py-2 px-4 cursor-pointer rounded-[10px]">+ Add New Driver</div>
         </div>
         <div>
         </div>
-        <div class="grid grid-cols-4 w-[80%] mx-auto px-[24px] justify-between align-center font-bold p-2">
+        <div class="grid grid-cols-4 w-[90%] mx-auto px-[24px] justify-between align-center font-bold p-2">
           <div>Firstname</div>
           <div>Lastname</div>
           <div>Email</div>
           <div class="justify-end flex">Phone</div>
         </div>
         <div v-for="driver in drivers" :key="driver.id">
-          <driver-item @click="getDriver(driver.id)" class="bg-[#eff]" :class="{ 'bg-[#fef]': driver.id % 2 === 0 }" :driver-data="driver.data" />
+          <driver-item @click="getDriver(driver.id)" class="w-[90%] bg-[#eff]" :class="{ 'bg-[#fef]': driver.id % 2 === 0 }" :driver-data="driver.data" />
         </div>
       </div>
     </div>
