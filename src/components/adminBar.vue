@@ -6,7 +6,7 @@ const router = useRouter();
 
 const isActive = ref(router.currentRoute.value.fullPath as string)
 
-const activate = async (str) => {
+const activate = async (str: string) => {
   isActive.value = str;
   console.log(router.currentRoute.value)
   await router.push(`${str}`)

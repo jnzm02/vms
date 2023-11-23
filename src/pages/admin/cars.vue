@@ -6,28 +6,28 @@ const cars = [
   {
     id: 1,
     data: {
-      // name: 'Aidyn',
+      name: 'Aidyn',
       mark: 'Chevrolet',
       color: 'red'
     }
   }, {
     id: 2,
     data: {
-      // name: '',
+      name: '',
       mark: 'Mercedes',
       color: 'white'
     }
   }, {
     id: 3,
     data: {
-      // name: '',
+      name: '',
       mark: 'Toyota',
       color: 'black'
     }
   }, {
     id: 4,
     data: {
-      // name: '',
+      name: '',
       mark: 'BMW',
       color: 'grey'
     }
