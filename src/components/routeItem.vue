@@ -5,7 +5,8 @@ const props = defineProps<{
     description: string,
     status: string,
     start_position: string,
-    end_position: string
+    end_position: string,
+    driver: string
   }
 }>()
 
@@ -21,6 +22,7 @@ const props = defineProps<{
         <div>{{ routeData.status }}</div>
         <div>{{ routeData.start_position }}</div>
         <div>{{ routeData.end_position }}</div>
+        <div>{{ routeData.driver }}</div>
       </div>
     </div>
   </div>

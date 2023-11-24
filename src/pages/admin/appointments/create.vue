@@ -47,6 +47,15 @@ const createNewDriver = async () => {
             <input type="text" class="max-w-[200px]" name="" id="end_position" v-model="end_position">
           </div>
         </div>
+        <div class="btn flex justify-center mb-5 align-left flex-col">
+          <label for="end_position" class="font-italic">Assign Driver</label>
+          <select name="assignDriver" id="assignDriver">
+            <option value="driver1">Aidyn Zhumaqadyr</option>
+            <option value="driver2">Nursultan Nazarbayev</option>
+            <option value="driver3">Kairat Nurtas</option>
+            <option value="driver4">Naruto Uzumaki</option>
+          </select>
+        </div>
         <div class="">
           <div v-if="isError === true" class="text-red mb-2">{{ errorMessage }}</div>
           <button @click='createNewDriver'>Create Fueling Person</button>
@@ -69,7 +78,7 @@ main {
   border-radius: 12px;
 }
 
-input {
+input, select {
   padding: 8px 12px;
   border-radius: 12px;
   border: 1px solid #222;

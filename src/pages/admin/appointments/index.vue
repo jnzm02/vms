@@ -13,7 +13,8 @@ const routes = [
     description: 'Description 1',
     start_position: 'Starting Position',
     end_position: 'Ending Position',
-    status: 'done'
+    status: 'done',
+    driver: 'Kairat Nurtas',
   },
   {
     id: 1,
@@ -21,7 +22,8 @@ const routes = [
     description: 'Description 2',
     start_position: 'Starting Position',
     end_position: 'Ending Position',
-    status: 'active'
+    status: 'active',
+    driver: 'Aidyn Zhumaqadyr',
   },
   {
     id: 1,
@@ -29,7 +31,8 @@ const routes = [
     description: 'Description 3',
     start_position: 'Starting Position',
     end_position: 'Ending Position',
-    status: 'done'
+    status: 'done',
+    driver: 'Aidyn Zhumaqadyr',
   },
   {
     id: 1,
@@ -37,7 +40,8 @@ const routes = [
     description: 'Description 4',
     start_position: 'Starting Position',
     end_position: 'Ending Position',
-    status: 'active'
+    status: 'active',
+    driver: 'Nursultan Nazarbayev',
   },
   {
     id: 1,
@@ -45,7 +49,8 @@ const routes = [
     description: 'Description 5',
     start_position: 'Starting Position',
     end_position: 'Ending Position',
-    status: 'active'
+    status: 'active',
+    driver: 'Nursultan Nazarbayev',
   },
 ]
 
