@@ -46,8 +46,8 @@ const createNewCar = async () => {
 <template>
   <main>
     <admin-bar></admin-bar>
-    <div class="rhs text-[black] px-[48px] py-[24px] w-full overflow-y-scroll">
-      <div class="search p-[20px] flex align-center  justify-end w-full gap-[8px]">
+    <div class="rhs text-[black] px-[48px] py-[24px] w-full overflow-y-scroll scrollbar-none">
+      <div class="search p-[20px] flex align-center justify-end w-full gap-[8px]">
         <input type="text" placeholder="Search for Cars">
         <button class="border-[1px] p-[2px]">Search</button>
       </div>

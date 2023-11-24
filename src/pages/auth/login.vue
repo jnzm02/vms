@@ -32,7 +32,7 @@ const loading = ref(false)
 
 const getUser = (async (username: string, password: string) => {
   try {
-    if (username === 'asd' && password === 'asd') {
+    if (username === 'aidyn@gmail.com' && password === 'asd') {
       return {role: 'admin', token: '123'}
     }
     return null
@@ -66,6 +66,64 @@ const validateData = (async () => {
     }
   }
 });
+
+const routes = [
+  {
+    id: 1,
+    routeData: {
+      driverId: 1,
+      name: "Route 1",
+      description: "Description 1",
+      status: 'active',
+      start_position: 'kabanbay batyr',
+      end_position: 'uly dala'
+    }
+  },
+  {
+    id: 1,
+    routeData: {
+      driverId: 1,
+      name: "Route 1",
+      description: "Description 1",
+      status: 'active',
+      start_position: 'kabanbay batyr',
+      end_position: 'uly dala'
+    }
+  },
+  {
+    id: 1,
+    routeData: {
+      driverId: 1,
+      name: "Route 1",
+      description: "Description 1",
+      status: 'done',
+      start_position: 'kabanbay batyr',
+      end_position: 'uly dala'
+    }
+  },
+  {
+    id: 1,
+    routeData: {
+      driverId: 1,
+      name: "Route 1",
+      description: "Description 1",
+      status: 'active',
+      start_position: 'kabanbay batyr',
+      end_position: 'uly dala'
+    }
+  },
+  {
+    id: 1,
+    routeData: {
+      driverId: 1,
+      name: "Route 1",
+      description: "Description 1",
+      status: 'done',
+      start_position: 'kabanbay batyr',
+      end_position: 'uly dala'
+    }
+  },
+]
 </script>
 
 <style lang="scss" scoped>

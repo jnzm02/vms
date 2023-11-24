@@ -25,7 +25,7 @@ const activate = async (str: string) => {
         <div class="img flex justify-center align-center w-[60px]"><img class="w-[30px]" src="@/assets/arrow.svg" alt="arrow"></div>
       </div>
       <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/reports')" :class="{ active: isActive === '/admin/reports' }">Reports</div>
-      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/routes')" :class="{ active: isActive === '/admin/routes' }">Routes</div>
+      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/appointments')" :class="{ active: isActive === '/admin/appointments' }">Appointments</div>
       <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/drivers')" :class="{ active: isActive === '/admin/drivers' }">Drivers</div>
       <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/cars')" :class="{ active: isActive === '/admin/cars' }">Cars</div>
       <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/auction')" :class="{ active: isActive === '/admin/auction' }">Auction</div>

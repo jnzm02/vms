@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 const props = defineProps<{
   routeData: {
-    driverId: number,
     name: string,
     description: string,
     status: string,
@@ -36,7 +35,7 @@ button {
 }
 
 .active {
-  background: #e9e;
-  color: white;
+  background: #cce;
+  color: black;
 }
 </style>
