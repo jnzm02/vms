@@ -5,7 +5,7 @@ import adminBar from '@/components/adminBar.vue'
 <template>
   <main>
     <admin-bar></admin-bar>
-    <div class="rhs text-[black]">auction</div>
+    <div class="rhs text-[black] px-[48px] py-[24px] w-full">auction</div>
   </main>
 </template>
 

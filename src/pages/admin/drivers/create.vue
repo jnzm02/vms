@@ -33,7 +33,7 @@ const createNewDriver = async () => {
 <template>
   <main>
     <admin-bar></admin-bar>
-    <div class="rhs text-[black] px-[48px] py-[24px]">
+    <div class="rhs text-[black] px-[48px] py-[24px] w-full">
       <div class="flex justify-center flex-col w-full">
         <div class="text-[24px] font-bold mb-4">Create New Driver</div>
         <div class="text-[18px] font-bold mb-3">User Data</div>

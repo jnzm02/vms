@@ -55,7 +55,7 @@ const createNewDriver = () => {
 <template>
   <main>
     <admin-bar></admin-bar>
-    <div class="rhs text-[black] px-[48px] py-[24px]">
+    <div class="rhs text-[black] px-[48px] py-[24px] w-full">
       <div class="search p-[20px] flex align-center  justify-end w-full gap-[8px]">
         <input type="text" placeholder="Search for Drivers">
         <button class="border-[1px] p-[2px]">Search</button>

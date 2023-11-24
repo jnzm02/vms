@@ -33,7 +33,7 @@ const loading = ref(false)
 const getUser = (async (username: string, password: string) => {
   try {
     if (username === 'asd' && password === 'asd') {
-      return {role: 'admin'}
+      return {role: 'admin', token: '123'}
     }
     return null
     // const data = { username, password }
@@ -58,7 +58,8 @@ const validateData = (async () => {
       errorMessage.value = true;
     } else if (user.role === 'admin') {
       errorMessage.value = false;
-      await router.push('/admin/reports')
+      localStorage.setItem('authToken', user.token)
+      await router.push('/admin/profile')
     } else if (user.role === 'driver') {
       errorMessage.value = false
       await router.push('/driver/main')

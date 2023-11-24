@@ -5,7 +5,7 @@ import adminBar from '@/components/adminBar.vue'
 <template>
   <main>
     <admin-bar></admin-bar>
-    <div class="rhs text-[black]">profile</div>
+    <div class="rhs text-[black] px-[48px] py-[24px] w-full overflow-y-scroll">profile</div>
   </main>
 </template>
 

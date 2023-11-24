@@ -13,14 +13,16 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="grid grid-cols rounded-[20px] px-[24px] w-full justify-between align-center p-2">
-    <div class="flex flex-col gap-[4px]">
-      <img src="@/assets/car.png" class='bg-transparent' alt="car">
-      <div>{{ routeData.name }}</div>
-      <div>{{ routeData.description }}</div>
-      <div>{{ routeData.status }}</div>
-      <div>{{ routeData.start_position }}</div>
-      <div>{{ routeData.end_position }}</div>
+  <div class="rounded-[20px] px-[24px] justify-between align-center p-2 bg-[#eee] w-[200px] cursor-pointer" :class="{ active: routeData.status === 'active'}">
+    <div class="">
+      <img src="@/assets/route.png" class='bg-transparent w-[120px]' alt="route" >
+      <div class="flex flex-col">
+        <div>{{ routeData.name }}</div>
+        <div>{{ routeData.description }}</div>
+        <div>{{ routeData.status }}</div>
+        <div>{{ routeData.start_position }}</div>
+        <div>{{ routeData.end_position }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,5 +33,10 @@ button {
   color: white;
   border-radius: 8px;
   padding: 4px;
+}
+
+.active {
+  background: #e9e;
+  color: white;
 }
 </style>

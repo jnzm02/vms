@@ -8,7 +8,7 @@
 import App from './App.vue'
 import '@/assets/main.scss'
 
-// Composables
+// Composable
 import { createApp } from 'vue'
 
 // Plugins

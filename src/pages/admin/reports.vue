@@ -5,7 +5,7 @@ import adminBar from '@/components/adminBar.vue'
 <template>
   <main>
     <admin-bar></admin-bar>
-    <div class="rhs text-[black]">reports</div>
+    <div class="rhs text-[black] px-[48px] py-[24px] w-full overflow-y-scroll">reports</div>
   </main>
 </template>
 

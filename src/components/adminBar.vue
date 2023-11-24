@@ -35,7 +35,7 @@ const activate = async (str: string) => {
   </div>
 </template>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .lhs {
   min-width: 200px;
 }
