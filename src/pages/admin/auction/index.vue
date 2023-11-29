@@ -16,7 +16,7 @@ onMounted(async () => {
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
   })
-  auctions.value = res.data.content as AuctionsInterface
+  auctions.value = res.data.content as AuctionsInterface[]
   isLoading.value = false
 })
 </script>
@@ -34,7 +34,7 @@ onMounted(async () => {
         <div class="rounded-[12px]">
           <div class="flex justify-space-between align-center">
             <div class="text-[24px] my-4 rounded-4">Auctions</div>
-            <div @click="createNewDriver" class="font-bold bg-[black] text-[white] py-2 px-4 cursor-pointer rounded-[10px]">+ New Auction</div>
+            <div @click="$router.push('auction/create')" class="font-bold bg-[black] text-[white] py-2 px-4 cursor-pointer rounded-[10px]">+ New Auction</div>
           </div>
           <div>
           </div>

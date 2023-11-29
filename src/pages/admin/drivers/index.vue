@@ -3,7 +3,6 @@ import adminBar from '@/components/adminBar.vue'
 
 import { useRouter } from 'vue-router'
 import {onMounted, ref} from "vue";
-import {DriversInterface} from "@/interfaces/drivers";
 import axios from "axios";
 import LoadingBar from "@/components/loadingBar.vue";
 import DriverItem from "@/components/driverItem.vue";
@@ -11,7 +10,7 @@ import {AdminInterface} from "@/interfaces/admin";
 
 const router = useRouter()
 
-const drivers = ref([] as DriversInterface[])
+const drivers = ref([] as AdminInterface[])
 const isLoading = ref(true)
 onMounted(async () => {
   const role = 'driver';
@@ -28,9 +27,6 @@ onMounted(async () => {
   console.log(drivers.value)
   isLoading.value = false
 })
-const getDriver = async (id: number) => {
-  await router.push(`drivers/${id}`)
-}
 
 const createNewDriver = () => {
   router.push('drivers/create')

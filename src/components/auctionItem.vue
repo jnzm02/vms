@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="flex rounded-[20px] px-[24px] w-full justify-center align-center p-2">
+  <div @click="$router.push(`auction/${auctionData.id}`)" class="flex rounded-[20px] px-[24px] w-full justify-center align-center p-2 cursor-pointer">
     <div class="flex flex-col gap-[4px]">
       <img src="@/assets/car.png" class='bg-transparent' alt="car">
       <div>Model: {{ auctionData.vehicle.model }}</div>
@@ -18,7 +18,7 @@ const props = defineProps<{
         </span>
       </div>
       <div>Year: {{ auctionData.vehicle.year }}</div>
-      <button class="bg-transparent flex justify-end"><img src="@/assets/arrow-right.svg" class="w-6 h-6 bg-transparent" alt="right" @click="$router.push(`auction/${auctionData.id}`)"></button>
+<!--      <button class="bg-transparent flex justify-end"><img src="@/assets/arrow-right.svg" class="w-6 h-6 bg-transparent" alt="right" @click="$router.push(`auction/${auctionData.id}`)"></button>-->
     </div>
   </div>
 </template>

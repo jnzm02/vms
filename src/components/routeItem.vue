@@ -8,11 +8,11 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="flex rounded-[20px] px-[24px] justify-between align-center p-2 bg-[#eee] w-[200px] cursor-pointer" :class="{ active: routeData.status === 'active'}">
+  <div @click="$router.push(`routes/${routeData.id}`)" class="cursor-pointer rounded-[20px] px-[24px] justify-between align-center p-2 bg-[#eee]" :class="{ active: routeData.status === 'active'}">
     <div class="">
       <img src="@/assets/route.png" class='bg-transparent w-[120px]' alt="route" >
       <div class="flex flex-col">
-        <div><span :class="{ 'bg-yellow text-white p-1 rounded-2': routeData.status === 'WAITING'}">{{ routeData.status }}</span></div>
+        <div><span :class="{ 'bg-yellow': routeData.status === 'WAITING', 'bg-cyan': routeData.status === 'NEW' }" class="text-white my-1 p-1 rounded-2">{{ routeData.status }}</span></div>
         <div v-if="routeData.driver" class="flex justify-start gap-1">
           Driver:
           <div>{{ routeData.driver.user.firstName }}</div>

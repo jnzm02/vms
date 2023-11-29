@@ -41,7 +41,7 @@ const createNewDriver = () => {
     <admin-bar></admin-bar>
     <div class="rhs text-[black] px-[48px] py-[24px] w-full overflow-y-scroll scrollbar-none">
       <loading-bar v-if="isLoading" />
-      <div v-else>
+      <div v-else></div>
       <div class="search p-[20px] flex align-center  justify-end w-full gap-[8px]">
         <input type="text" placeholder="Search Fuelling Person">
         <button class="border-[1px] p-[2px]">Search</button>
@@ -58,7 +58,7 @@ const createNewDriver = () => {
           <fuel-item class="bg-[#eff]" :fuel-data="fueler"/>
         </div>
           </div>
-      </div></div>
+      </div>
     </div>
   </main>
 </template>

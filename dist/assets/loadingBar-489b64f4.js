@@ -1,0 +1,1 @@
+import{_ as s,o as a,c,p as o,f as t,b as _}from"./index-5dec5081.js";const d={},n=e=>(o("data-v-6131a7d8"),e=e(),t(),e),l={class:"w-full h-full flex justify-center align-center"},r=n(()=>_("div",{class:"lds-dual-ring"},null,-1)),i=[r];function p(e,f){return a(),c("div",l,i)}const h=s(d,[["render",p],["__scopeId","data-v-6131a7d8"]]);export{h as L};

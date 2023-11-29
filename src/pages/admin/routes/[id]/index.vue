@@ -1,19 +1,8 @@
 <script lang="ts" setup>
 import adminBar from '@/components/adminBar.vue'
-import { ref } from "vue"
 import { useRouter } from 'vue-router'
 
 const router = useRouter();
-const driver = {
-  id: 1,
-  email: "aidyn@gmail.com",
-  firstname: 'Aidyn',
-  lastname: 'Zhumaqadyr',
-  address: "22.412",
-  phone: '87085437222',
-  governmentId: '044037252',
-  drivingLicense: '123456789'
-}
 
 const goBack = async () => {
   await router.go(-1)
@@ -27,7 +16,7 @@ const goBack = async () => {
       <div class="flex justify-center flex-col w-full">
         <div class="mb-2">
           <button @click="goBack" class="flex align-center justify-center">
-            <img src="../../../../assets/arrow-left.svg" alt="arrow-left">Back</button>
+            <img src="@/assets/arrow-left.svg" alt="arrow-left">Back</button>
         </div>
         <div class="grid grid-cols-2 w-full rounded-[12px] border-black">
           <div>asd</div>

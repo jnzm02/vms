@@ -42,16 +42,15 @@ const createAppointment = () => {
       <div class="rounded-[12px] mt-[20px] flex flex-col justify-center">
         <div class="flex justify-space-between align-center">
           <div class="text-[24px] my-4 rounded-4">Active Routes</div>
-          <div @click="createAppointment" class="font-bold bg-[black] text-[white] py-2 px-4 cursor-pointer rounded-[10px]">+ Create a Route</div>
+<!--          <div @click="createAppointment" class="font-bold bg-[black] text-[white] py-2 px-4 cursor-pointer rounded-[10px]">+ Create a Route</div>-->
         </div>
-        <div class="flex justify-space-between align-center">
-          <div class="grid gap-x-4 grid-cols-3">
+          <div class="grid grid-cols-3 gap-[20px]">
             <div v-for="route in routes" :key="route.id">
-              <route-item v-if="route.status === 'WAITING'" :routeData="route"/>
+              <route-item :routeData="route"/>
             </div>
           </div>
         </div>
-      </div></div>
+      </div>
     </div>
   </main>
 </template>

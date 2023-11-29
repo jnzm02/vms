@@ -19,8 +19,8 @@ const activate = async (str: string) => {
       <div class="admin gap-[16px] mb-[24px] py-[16px] pr-[24px] cursor-pointer" @click="activate('/admin/profile')" :class="{ active: isActive.startsWith('/admin/profile') }">
         <div class="img flex justify-center align-center w-[60px]"><img src="@/assets/profile.svg" class="w-[48px]" alt="profile"></div>
         <div class="">
-          <div class="name text-[22px]">Aidyn</div>
-          <div class="email text-[12px]">Aidyn@gmail.com</div>
+          <div class="name text-[22px]">Admin</div>
+          <div class="email text-[12px]">admin@example.com</div>
         </div>
         <div class="img flex justify-center align-center w-[60px]"><img class="w-[30px]" src="@/assets/arrow.svg" alt="arrow"></div>
       </div>
