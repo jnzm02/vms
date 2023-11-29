@@ -30,18 +30,25 @@ const errorMessage = ref(false)
 const message = ref('')
 const loading = ref(false)
 
-const getUser = (async (username: string, password: string) => {
-  try {
-    if (username === 'aidyn@gmail.com' && password === 'asd') {
-      return {role: 'admin', token: '123'}
-    }
-    return null
-    // const data = { username, password }
-    // const response = await axios.get( process.env.BASE_URL + "/login", {params: data})
-    // return response.data.user
-  } catch(e) {
-    return null
-  }
+const getUser = (async (username: string, password: string): Promise<boolean> => {
+  let success = false;
+// POST request example
+  await axios.post(import.meta.env.VITE_SERVER_URL + 'auth/login', { username, password },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => {
+      console.log('Response:', response.data);
+      localStorage.setItem('token', response.data.accessToken)
+      success = true
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      success = false
+    });
+  return success
 })
 
 const validateData = (async () => {
@@ -56,14 +63,8 @@ const validateData = (async () => {
     if (!user) {
       message.value = "User not Found!";
       errorMessage.value = true;
-    } else if (user.role === 'admin') {
-      errorMessage.value = false;
-      localStorage.setItem('authToken', user.token)
-      await router.push('/admin/profile')
-    } else if (user.role === 'driver') {
-      errorMessage.value = false
-      await router.push('/driver/main')
     }
+    await router.push('/admin/profile')
   }
 });
 

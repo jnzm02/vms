@@ -1,8 +1,4 @@
 export const state = {
-  followingList: [],
-  friends: [],
-  clubList: [],
-  openList: [],
   loaders: {
     friends: false,
     followingList: false,
@@ -11,9 +7,11 @@ export const state = {
   },
   userData: {
     id: null,
-    name: "",
-    email: "",
-    avatar: "",
-    telegram: "",
+    username: null,
+    role: null,
+    firstName: null,
+    lastName: null,
+    email: null,
+    phoneNumber: null
   }
 }

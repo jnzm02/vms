@@ -16,7 +16,7 @@ const activate = async (str: string) => {
 <template>
   <div class="lhs flex flex-column justify-center align-center">
     <div class="bar w-[100%] text-white h-[70vh]">
-      <div class="admin gap-[16px] mb-[24px] py-[16px] pr-[24px] cursor-pointer" @click="activate('/admin/profile')" :class="{ active: isActive === '/admin/profile' }">
+      <div class="admin gap-[16px] mb-[24px] py-[16px] pr-[24px] cursor-pointer" @click="activate('/admin/profile')" :class="{ active: isActive.startsWith('/admin/profile') }">
         <div class="img flex justify-center align-center w-[60px]"><img src="@/assets/profile.svg" class="w-[48px]" alt="profile"></div>
         <div class="">
           <div class="name text-[22px]">Aidyn</div>
@@ -24,13 +24,13 @@ const activate = async (str: string) => {
         </div>
         <div class="img flex justify-center align-center w-[60px]"><img class="w-[30px]" src="@/assets/arrow.svg" alt="arrow"></div>
       </div>
-      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/reports')" :class="{ active: isActive === '/admin/reports' }">Reports</div>
-      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/appointments')" :class="{ active: isActive === '/admin/appointments' }">Appointments</div>
-      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/drivers')" :class="{ active: isActive === '/admin/drivers' }">Drivers</div>
-      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/cars')" :class="{ active: isActive === '/admin/cars' }">Cars</div>
-      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/auction')" :class="{ active: isActive === '/admin/auction' }">Auction</div>
-      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/maintenance')" :class="{ active: isActive === '/admin/maintenance' }">Maintenance Personnel</div>
-      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/fueling')" :class="{ active: isActive === '/admin/fueling' }">Fueling Personnel</div>
+      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/reports')" :class="{ active: isActive.startsWith('/admin/reports') }">Reports</div>
+      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/routes')" :class="{ active: isActive.startsWith('/admin/routes') }">Routes</div>
+      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/drivers')" :class="{ active: isActive.startsWith('/admin/drivers') }">Drivers</div>
+      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/cars')" :class="{ active: isActive.startsWith('/admin/cars') }">Cars</div>
+      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/auction')" :class="{ active: isActive.startsWith('/admin/auction') }">Auction</div>
+      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/maintenance')" :class="{ active: isActive.startsWith('/admin/maintenance') }">Maintenance Personnel</div>
+      <div class="my-[2px] cursor-pointer p-[12px] pl-[16px]" @click="activate('/admin/fueling')" :class="{ active: isActive.startsWith('/admin/fueling') }">Fueling Personnel</div>
     </div>
   </div>
 </template>

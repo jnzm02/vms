@@ -1,46 +1,33 @@
 <script lang="ts" setup>
 import adminBar from '@/components/adminBar.vue'
-import driverItem from '@/components/driverItem.vue'
 
 import { useRouter } from 'vue-router'
+import FuelItem from "@/components/fuelItem.vue";
+import {onMounted, ref} from "vue";
+import {AdminInterface} from "@/interfaces/admin";
+import axios from "axios";
+import LoadingBar from "@/components/loadingBar.vue";
 
 const router = useRouter()
 
-const fuelers = [
-  {
-    id: 1,
-    data: {
-      name: 'Aidyn',
-      lastname: 'Zhumaqadyr',
-      email: 'aidyn03@gmail.com',
-      phone: '87776665544'
+const fuel = ref([] as AdminInterface[])
+const isLoading = ref(true)
+
+onMounted(async () => {
+  const role = 'fuel';
+  const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}users?role=${role}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
-  }, {
-    id: 2,
-    data: {
-      name: 'Nursultan',
-      lastname: 'Nazarbayev',
-      email: 'nurs@gmail.com',
-      phone: '8700000000'
-    }
-  }, {
-    id: 3,
-    data: {
-      name: 'Kairat',
-      lastname: 'Nurtas',
-      email: 'nurtasinger@gmail.com',
-      phone: '8777777777'
-    }
-  }, {
-    id: 4,
-    data: {
-      name: 'Naruto',
-      lastname: 'Uzumaki',
-      email: 'narutothehokage@gmail.com',
-      phone: '87077077777'
-    }
-  }
-]
+  })
+  fuel.value = res.data.content as AdminInterface[];
+  fuel.value = fuel.value.filter((fueler: AdminInterface) => {
+    return fueler.role === 'fuel';
+  });
+  console.log(fuel.value)
+  isLoading.value = false
+})
 
 
 const createNewDriver = () => {
@@ -52,7 +39,9 @@ const createNewDriver = () => {
 <template>
   <main>
     <admin-bar></admin-bar>
-    <div class="rhs text-[black] px-[48px] py-[24px] w-full">
+    <div class="rhs text-[black] px-[48px] py-[24px] w-full overflow-y-scroll scrollbar-none">
+      <loading-bar v-if="isLoading" />
+      <div v-else>
       <div class="search p-[20px] flex align-center  justify-end w-full gap-[8px]">
         <input type="text" placeholder="Search Fuelling Person">
         <button class="border-[1px] p-[2px]">Search</button>
@@ -64,16 +53,12 @@ const createNewDriver = () => {
         </div>
         <div>
         </div>
-        <div class="grid grid-cols-5 px-[24px] w-full justify-between align-center font-bold p-2">
-          <div>Firstname</div>
-          <div>Lastname</div>
-          <div>Email</div>
-          <div class="justify-end flex">Phone</div>
+        <div class="grid grid-cols-3 gap-[20px]">
+        <div v-for="fueler in fuel" :key="fueler.id">
+          <fuel-item class="bg-[#eff]" :fuel-data="fueler"/>
         </div>
-        <div v-for="fueler in fuelers" :key="fueler.id">
-          <driver-item class="bg-[#eff]" :class="{ 'bg-[#fef]': fueler.id % 2 === 0 }" :driver-data="fueler.data" />
-        </div>
-      </div>
+          </div>
+      </div></div>
     </div>
   </main>
 </template>

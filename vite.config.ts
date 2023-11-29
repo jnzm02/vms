@@ -24,7 +24,12 @@ export default defineConfig({
     Pages(),
     Layouts(),
   ],
-  define: { 'process.env': {} },
+  define: {
+    'process.env': {
+      VITE_SERVER_URL: process.env.VITE_SERVER_URL,
+      VITE_SERVER_PORT: process.env.VITE_SERVER_PORT
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

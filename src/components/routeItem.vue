@@ -1,28 +1,27 @@
 <script lang="ts" setup>
+import {RoutesInterface} from "@/interfaces/routes";
+
 const props = defineProps<{
-  routeData: {
-    name: string,
-    description: string,
-    status: string,
-    start_position: string,
-    end_position: string,
-    driver: string
-  }
+  routeData: RoutesInterface
 }>()
 
 </script>
 
 <template>
-  <div class="rounded-[20px] px-[24px] justify-between align-center p-2 bg-[#eee] w-[200px] cursor-pointer" :class="{ active: routeData.status === 'active'}">
+  <div class="flex rounded-[20px] px-[24px] justify-between align-center p-2 bg-[#eee] w-[200px] cursor-pointer" :class="{ active: routeData.status === 'active'}">
     <div class="">
       <img src="@/assets/route.png" class='bg-transparent w-[120px]' alt="route" >
       <div class="flex flex-col">
-        <div>{{ routeData.name }}</div>
-        <div>{{ routeData.description }}</div>
-        <div>{{ routeData.status }}</div>
-        <div>{{ routeData.start_position }}</div>
-        <div>{{ routeData.end_position }}</div>
-        <div>{{ routeData.driver }}</div>
+        <div><span :class="{ 'bg-yellow text-white p-1 rounded-2': routeData.status === 'WAITING'}">{{ routeData.status }}</span></div>
+        <div v-if="routeData.driver" class="flex justify-start gap-1">
+          Driver:
+          <div>{{ routeData.driver.user.firstName }}</div>
+          <div>{{ routeData.driver.user.lastName }}</div>
+        </div>
+        <div v-else>No Driver Assigned</div>
+        <div>Starting Point: {{ routeData.startPoint }}</div>
+        <div>End Point: {{ routeData.endPoint }}</div>
+<!--        <div>{{ routeData.driver }}</div>-->
       </div>
     </div>
   </div>

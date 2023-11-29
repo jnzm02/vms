@@ -1,6 +1,18 @@
 import { api } from '@/api/endpoint';
+import {state} from "@/store/state";
 
 export const actions = {
+  async getAdminData() {
+    try {
+      const res = await api.get ('users/my')
+      state.userData = res.data
+      return res.data
+    } catch (e) {
+      console.log(e)
+      throw e
+    }
+  },
+
   async getFollowingList() {
     try {
       const response = await api.get('/following');

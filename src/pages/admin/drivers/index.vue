@@ -1,47 +1,33 @@
 <script lang="ts" setup>
 import adminBar from '@/components/adminBar.vue'
-import driverItem from '@/components/driverItem.vue'
 
 import { useRouter } from 'vue-router'
+import {onMounted, ref} from "vue";
+import {DriversInterface} from "@/interfaces/drivers";
+import axios from "axios";
+import LoadingBar from "@/components/loadingBar.vue";
+import DriverItem from "@/components/driverItem.vue";
+import {AdminInterface} from "@/interfaces/admin";
 
 const router = useRouter()
 
-const drivers = [
-  {
-    id: 1,
-    data: {
-      name: 'Aidyn',
-      lastname: 'Zhumaqadyr',
-      email: 'aidyn03@gmail.com',
-      phone: '87776665544'
+const drivers = ref([] as DriversInterface[])
+const isLoading = ref(true)
+onMounted(async () => {
+  const role = 'driver';
+  const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}users?role=${role}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
-  }, {
-    id: 2,
-    data: {
-      name: 'Nursultan',
-      lastname: 'Nazarbayev',
-      email: 'nurs@gmail.com',
-      phone: '8700000000'
-    }
-  }, {
-    id: 3,
-    data: {
-      name: 'Kairat',
-      lastname: 'Nurtas',
-      email: 'nurtasinger@gmail.com',
-      phone: '8777777777'
-    }
-  }, {
-    id: 4,
-    data: {
-      name: 'Naruto',
-      lastname: 'Uzumaki',
-      email: 'narutothehokage@gmail.com',
-      phone: '87077077777'
-    }
-  }
-]
-
+  })
+  drivers.value = res.data.content as AdminInterface[];
+  drivers.value = drivers.value.filter((driver: AdminInterface) => {
+    return driver.role === 'driver';
+  });
+  console.log(drivers.value)
+  isLoading.value = false
+})
 const getDriver = async (id: number) => {
   await router.push(`drivers/${id}`)
 }
@@ -55,7 +41,8 @@ const createNewDriver = () => {
 <template>
   <main>
     <admin-bar></admin-bar>
-    <div class="rhs text-[black] px-[48px] py-[24px] w-full">
+    <div class="rhs text-[black] px-[48px] py-[24px] w-full overflow-y-scroll scrollbar-none">
+      <loading-bar v-if="isLoading" />
       <div class="search p-[20px] flex align-center  justify-end w-full gap-[8px]">
         <input type="text" placeholder="Search for Drivers">
         <button class="border-[1px] p-[2px]">Search</button>
@@ -67,14 +54,10 @@ const createNewDriver = () => {
         </div>
         <div>
         </div>
-        <div class="grid grid-cols-4 w-[90%] mx-auto px-[24px] justify-between align-center font-bold p-2">
-          <div>Firstname</div>
-          <div>Lastname</div>
-          <div>Email</div>
-          <div class="justify-end flex">Phone</div>
-        </div>
-        <div v-for="driver in drivers" :key="driver.id">
-          <driver-item @click="getDriver(driver.id)" class="w-[90%] bg-[#eff]" :class="{ 'bg-[#fef]': driver.id % 2 === 0 }" :driver-data="driver.data" />
+        <div class="grid grid-cols-3 gap-[20px]">
+          <div v-for="driver in drivers" :key="driver.id">
+            <driver-item class="bg-[#eff]" :car-data="driver" :driver-data="driver"/>
+          </div>
         </div>
       </div>
     </div>

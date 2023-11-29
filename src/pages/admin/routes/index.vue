@@ -1,63 +1,57 @@
 <script lang="ts" setup>
 import adminBar from '@/components/adminBar.vue'
+import RouteItem from "@/components/routeItem.vue";
 
 import { useRouter } from 'vue-router'
-import MaintenanceItem from "@/components/maintenanceItem.vue";
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import {RoutesInterface} from "@/interfaces/routes";
 import LoadingBar from "@/components/loadingBar.vue";
-import {AdminInterface} from "@/interfaces/admin";
 
 const router = useRouter()
 
-const maintainers = ref([] as AdminInterface[])
+const routes = ref([] as RoutesInterface[])
 const isLoading = ref(true)
-
 onMounted(async () => {
-  const role = 'maintenance';
-  const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}users?role=${role}`, {
+  const res = await axios.get(import.meta.env.VITE_SERVER_URL + 'routes/all', {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
   })
-  maintainers.value = res.data.content as AdminInterface[];
-  maintainers.value = maintainers.value.filter((maintainers: AdminInterface) => {
-    return maintainers.role === 'maintenance';
-  });
-  console.log(maintainers.value)
+  routes.value = res.data.content as RoutesInterface[]
+  console.log(routes)
   isLoading.value = false
 })
-const createNewDriver = () => {
-  router.push('maintenance/create')
-}
 
+const createAppointment = () => {
+  router.push('routes/create')
+}
 </script>
 
 <template>
   <main>
     <admin-bar></admin-bar>
-    <div class="rhs text-[black] px-[48px] py-[24px] w-full">
+    <div class="rhs text-[black] px-[48px] py-[24px] w-full overflow-y-scroll scrollbar-none">
       <loading-bar v-if="isLoading" />
       <div v-else>
       <div class="search p-[20px] flex align-center  justify-end w-full gap-[8px]">
-        <input type="text" placeholder="Search Maintenance Person">
+        <input type="text" placeholder="Search for Route">
         <button class="border-[1px] p-[2px]">Search</button>
       </div>
-      <div class="rounded-[12px]">
+      <div class="rounded-[12px] mt-[20px] flex flex-col justify-center">
         <div class="flex justify-space-between align-center">
-          <div class="text-[24px] my-4 rounded-4">Maintenance Personnel List</div>
-          <div @click="createNewDriver" class="font-bold bg-[black] text-[white] py-2 px-4 cursor-pointer rounded-[10px]">+ Add New Maintenance Person</div>
+          <div class="text-[24px] my-4 rounded-4">Active Routes</div>
+          <div @click="createAppointment" class="font-bold bg-[black] text-[white] py-2 px-4 cursor-pointer rounded-[10px]">+ Create a Route</div>
         </div>
-        <div>
-        </div>
-        <div class="grid grid-cols-3 gap-[20px]">
-          <div v-for="maintainer in maintainers" :key="maintainer.id">
-            <maintenance-item class="bg-[#eff]" :maintainer-data="maintainer"/>
+        <div class="flex justify-space-between align-center">
+          <div class="grid gap-x-4 grid-cols-3">
+            <div v-for="route in routes" :key="route.id">
+              <route-item v-if="route.status === 'WAITING'" :routeData="route"/>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
+      </div></div>
     </div>
   </main>
 </template>
@@ -75,6 +69,7 @@ main {
   border-radius: 12px;
 }
 
+
 input {
   padding: 12px 16px;
   border-radius: 12px;
@@ -91,4 +86,5 @@ button {
   background: black;
   color: white;
 }
+
 </style>
