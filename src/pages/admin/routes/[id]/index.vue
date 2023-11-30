@@ -19,7 +19,21 @@ const drivers = ref(null as DriversInterface[])
 const cars = ref(null as CarsInterface[])
 
 const selectedDriver = ref(null as DriversInterface)
-const selectedCar = ref(null as CarsInterface)
+const generateReport = async () => {
+  const data = {
+    "fromDate": "2023-11-30",
+    "toDate": "2023-11-30",
+    "driverId": currentID,
+    "vehicleId": 4
+  }
+  const res = await axios.post(import.meta.env.VITE_SERVER_URL + 'routes/report', data, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+  });
+}
+
 
 onMounted(async () => {
   const res = await axios.get(import.meta.env.VITE_SERVER_URL + 'routes/' + currentId, {
@@ -44,13 +58,13 @@ const assignDriver = async () => {
   isSelected.value = true
   console.log(selectedDriver.value)
   cars.value = selectedDriver.value.vehicle as CarsInterface
-  await axios.put(`${import.meta.env.VITE_SERVER_URL}routes/${currentId}/assign-driver/${selectedDriver.value.id}`, {
+  await axios.put(`${import.meta.env.VITE_SERVER_URL}routes/${currentId}/assign-driver/${selectedDriver.value.id}`, null, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
   })
-  await router.push('routes')
+  await router.push('./')
 }
 
 const goBack = async () => {
@@ -70,8 +84,17 @@ const goBack = async () => {
         </div>
         <div class="grid grid-cols-2 w-full rounded-[12px] border-black">
           <div>
-            <h2 class="text-[36px]">Route Info</h2>
             <div class="flex flex-col gap-[4px]">
+
+              <div>
+                <h2 class="text-[36px]">Route Info</h2>
+                <div>Starting Point: {{ route.startPoint}} </div>
+                <div>Ending Point: {{ route.endPoint }} </div>
+                <div>Status: {{ route.status }} </div>
+                <div>
+<!--                  <button class="mt-2" @click="generateReport">Generate Report</button>-->
+                </div>
+              </div>
               <h3 class="text-[24px]">Order:</h3>
               <img src="@/assets/profile.svg" class='bg-transparent w-[50%]'  alt="car">
               <div>Username: {{ route.staff.username }}</div>
@@ -79,6 +102,7 @@ const goBack = async () => {
               <!--              <div v-else></div>-->
               <!--      <button class="bg-transparent flex justify-end"><img src="@/assets/arrow-right.svg" class="w-6 h-6 bg-transparent" alt="right" @click="$router.push(`cars/${carData.id}`)"></button>-->
             </div>
+
           </div>
           <div>
             <h2 class="text-[24px]">Driver Info</h2>

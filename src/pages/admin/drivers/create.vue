@@ -9,17 +9,16 @@ const email = ref('')
 const firstname = ref('')
 const lastname = ref('')
 const phone = ref('')
-const governmentId = ref('')
 const address = ref('')
 const password1 = ref('')
 const password2 = ref('')
-const drivingLicense = ref('')
+const username = ref('')
 
 const isError = ref(false)
 const errorMessage = ref('')
 
 const createNewDriver = async () => {
-  if (!password2.value || !password1.value || !firstname.value || !email.value || !lastname.value || !phone.value || !governmentId.value || !address.value || !drivingLicense.value) {
+  if (!password2.value || !password1.value || !firstname.value || !email.value || !lastname.value || !phone.value || !address.value) {
     isError.value = true
     errorMessage.value = "Fill All the Fields!"
   } else if (password2.value !== password1.value) {
@@ -35,7 +34,8 @@ const createNewDriver = async () => {
       "phoneNumber": phone.value,
       "password": password1.value
     }
-    await axios.post(import.meta.env.VITE_SERVER_URL + 'users/', data, {
+    console.log(data)
+    await axios.post(import.meta.env.VITE_SERVER_URL + 'users', data, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -59,6 +59,10 @@ const createNewDriver = async () => {
             <input type="text" class="max-w-[200px]" name="" id="email" v-model="email">
           </div>
           <div class="btn flex justify-center mb-5 align-left flex-col">
+            <label for="username" class="font-italic">Username</label>
+            <input type="text" class="max-w-[200px]" name="" id="username" v-model="username">
+          </div>
+          <div class="btn flex justify-center mb-5 align-left flex-col">
             <label for="firstname" class="font-italic">First Name</label>
             <input type="text" class="max-w-[200px]" name="" id="firstname" v-model="firstname">
           </div>
@@ -73,10 +77,6 @@ const createNewDriver = async () => {
           <div class="btn flex justify-center mb-5 align-left flex-col">
             <label for="phone" class="font-italic">Phone Number</label>
             <input type="text" class="max-w-[200px]" name="" id="phone" v-model="phone">
-          </div>
-          <div class="btn flex justify-center mb-5 align-left flex-col">
-            <label for="drivingLicense" class="font-italic">Driving License</label>
-            <input type="text" class="max-w-[200px]" name="" id="drivingLicense" v-model="drivingLicense">
           </div>
 <!--          <div class="btn flex justify-center mb-5 align-left flex-col">-->
 <!--            <label for="governmentId" class="font-italic">Government ID</label>-->

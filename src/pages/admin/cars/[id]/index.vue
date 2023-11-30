@@ -11,7 +11,7 @@ const router = useRouter();
 const currentId = router.currentRoute.value.params.id;
 
 const selectedUser = ref(null as AdminInterface)
-const users = ref(null as AdminInterface[])
+const users = ref(null as DriversInterface[])
 
 const car = ref(null as CarsInterface)
 const isLoading = ref(true)
@@ -32,7 +32,7 @@ onMounted(async () => {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     })
-    users.value = res2.data.content as AdminInterface[];
+    users.value = res2.data.content as DriversInterface[];
     // users.value = users.value.filter((driver: AdminInterface) => {
     //   return driver.role === 'driver';
     // });
@@ -44,14 +44,14 @@ onMounted(async () => {
 
 const assignCar = async () => {
   const driverId = +selectedUser.value.id
-  const res = await axios.put(`${import.meta.env.VITE_SERVER_URL}drivers/${driverId}/assign-vehicle/${+currentId}`, {
+  const res = await axios.put(`${import.meta.env.VITE_SERVER_URL}drivers/${driverId}/assign-vehicle/${+currentId}`, null, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
   })
   console.log(res)
-  await router.push('cars')
+  await router.push('./cars')
 }
 
 const goBack = async () => {

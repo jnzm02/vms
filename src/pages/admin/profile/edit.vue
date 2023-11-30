@@ -14,7 +14,21 @@ const password2 = ref('')
 const isError = ref(true)
 const message = ref('')
 
-const updateContactInfo = () => {
+const updateContactInfo = async () => {
+  const data = {
+    "username": username.value,
+    "role": 'admin',
+    "firstName": firstname.value,
+    "lastName": lastname.value,
+    "email": email.value,
+    "phoneNumber": phone.value,
+  }
+  await axios.put(import.meta.env.VITE_SERVER_URL + 'users/1', data, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+  });
 }
 
 const updatePassword = async () => {
@@ -28,7 +42,7 @@ const updatePassword = async () => {
     "confirmPassword": password1
   }
   try {
-    await axios.post(import.meta.env.VITE_SERVER_URL + 'users/password', data, {
+    await axios.put(import.meta.env.VITE_SERVER_URL + 'users/password', data, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`

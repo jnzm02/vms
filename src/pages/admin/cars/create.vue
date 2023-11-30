@@ -2,6 +2,7 @@
 import adminBar from '@/components/adminBar.vue'
 import { ref } from "vue"
 import { useRouter } from 'vue-router'
+import axios from "axios";
 
 const router = useRouter();
 
@@ -10,6 +11,7 @@ const year = ref('')
 const fuelAmount = ref('')
 const licensePlate = ref('')
 const sittingCapacity = ref('')
+const vin = ref('')
 
 const isError = ref(false)
 const errorMessage = ref('')
@@ -19,7 +21,21 @@ const createNewCar = async () => {
     isError.value = true
     errorMessage.value = "Fill All the Fields!"
   } else {
-    const yearNumber = +year.value
+
+    const data = {
+      model: model.value,
+      "year": year.value,
+      "licencePlate": licensePlate.value,
+      "capacity": +sittingCapacity.value,
+      "vin": vin.value,
+      "fuelType": 'GAS'
+    }
+    await axios.post(import.meta.env.VITE_SERVER_URL + 'vehicles', data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     await router.push('/admin/cars');
   }
 }
@@ -43,6 +59,10 @@ const createNewCar = async () => {
           <div class="btn flex justify-center mb-5 align-left flex-col">
             <label for="fuelAmount" class="font-italic">Fuel Amount</label>
             <input type="text" class="max-w-[200px]" name="" id="fuelAmount" v-model="fuelAmount">
+          </div>
+          <div class="btn flex justify-center mb-5 align-left flex-col">
+            <label for="vin" class="font-italic">Vin</label>
+            <input type="text" class="max-w-[200px]" name="" id="vin" v-model="vin">
           </div>
           <div class="btn flex justify-center mb-5 align-left flex-col">
             <label for="licensePlate" class="font-italic">License Plate</label>

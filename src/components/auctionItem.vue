@@ -18,6 +18,7 @@ const props = defineProps<{
         </span>
       </div>
       <div>Year: {{ auctionData.vehicle.year }}</div>
+      <div>BID: {{ auctionData.currentBid }}$</div>
 <!--      <button class="bg-transparent flex justify-end"><img src="@/assets/arrow-right.svg" class="w-6 h-6 bg-transparent" alt="right" @click="$router.push(`auction/${auctionData.id}`)"></button>-->
     </div>
   </div>
