@@ -12,13 +12,14 @@ const props = defineProps<{
     <div class="">
       <img src="@/assets/route.png" class='bg-transparent w-[120px]' alt="route" >
       <div class="flex flex-col">
-        <div><span :class="{ 'bg-yellow': routeData.status === 'WAITING', 'bg-cyan': routeData.status === 'NEW' }" class="text-white my-1 p-1 rounded-2">{{ routeData.status }}</span></div>
+        <div><span :class="{ 'bg-yellow': routeData.status === 'WAITING', 'bg-cyan': routeData.status === 'NEW', 'bg-orange': routeData.status === 'IN_PROGRESS', 'bg-light-green': routeData.status === 'COMPLETED' }" class="text-white my-1 p-1 rounded-2">{{ routeData.status }}</span></div>
         <div v-if="routeData.driver" class="flex justify-start gap-1">
           Driver:
           <div>{{ routeData.driver.user.firstName }}</div>
           <div>{{ routeData.driver.user.lastName }}</div>
         </div>
         <div v-else>No Driver Assigned</div>
+        <div>Staff: {{ routeData.staff.firstName }} {{ routeData.staff.lastName }}</div>
         <div>Starting Point: {{ routeData.startPoint }}</div>
         <div>End Point: {{ routeData.endPoint }}</div>
 <!--        <div>{{ routeData.driver }}</div>-->

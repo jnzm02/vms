@@ -7,23 +7,23 @@ import axios from "axios";
 import LoadingBar from "@/components/loadingBar.vue";
 import DriverItem from "@/components/driverItem.vue";
 import {AdminInterface} from "@/interfaces/admin";
+import {DriversInterface} from "@/interfaces/drivers";
 
 const router = useRouter()
 
-const drivers = ref([] as AdminInterface[])
+const drivers = ref([] as DriversInterface[])
 const isLoading = ref(true)
 onMounted(async () => {
-  const role = 'driver';
-  const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}users?role=${role}`, {
+  const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}drivers/all`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
   })
-  drivers.value = res.data.content as AdminInterface[];
-  drivers.value = drivers.value.filter((driver: AdminInterface) => {
-    return driver.role === 'driver';
-  });
+  drivers.value = res.data.content as DriversInterface[];
+  // drivers.value = drivers.value.filter((driver: AdminInterface) => {
+  //   return driver.role === 'driver';
+  // });
   console.log(drivers.value)
   isLoading.value = false
 })
@@ -39,6 +39,7 @@ const createNewDriver = () => {
     <admin-bar></admin-bar>
     <div class="rhs text-[black] px-[48px] py-[24px] w-full overflow-y-scroll scrollbar-none">
       <loading-bar v-if="isLoading" />
+      <div v-else>
       <div class="search p-[20px] flex align-center  justify-end w-full gap-[8px]">
         <input type="text" placeholder="Search for Drivers">
         <button class="border-[1px] p-[2px]">Search</button>
@@ -52,10 +53,10 @@ const createNewDriver = () => {
         </div>
         <div class="grid grid-cols-3 gap-[20px]">
           <div v-for="driver in drivers" :key="driver.id">
-            <driver-item class="bg-[#eff]" :car-data="driver" :driver-data="driver"/>
+            <driver-item class="bg-[#eff]" :driver-data="driver"/>
           </div>
         </div>
-      </div>
+      </div></div>
     </div>
   </main>
 </template>

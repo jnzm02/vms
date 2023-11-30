@@ -48,7 +48,7 @@ const createNewCar = async () => {
           </div>
           <div class="grid grid-cols-3 gap-[20px]">
             <div v-for="car in cars" :key="car.id">
-              <car-item class="bg-[#eff]" :class="{ 'bg-[#fef]': car.id % 2 === 0 }" :car-data="car" />
+              <car-item class="bg-[#eff]" :car-data="car" />
             </div>
           </div>
         </div>

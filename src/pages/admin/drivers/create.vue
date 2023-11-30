@@ -2,6 +2,7 @@
 import adminBar from '@/components/adminBar.vue'
 import { ref } from "vue"
 import { useRouter } from 'vue-router'
+import axios from "axios";
 
 const router = useRouter();
 const email = ref('')
@@ -25,6 +26,21 @@ const createNewDriver = async () => {
     isError.value = true
     errorMessage.value = "Passwords Does not Match!"
   } else {
+    const data = {
+      username: username.value,
+      role: 'driver',
+      "firstName": firstname.value,
+      "lastName": lastname.value,
+      "email": email.value,
+      "phoneNumber": phone.value,
+      "password": password1.value
+    }
+    await axios.post(import.meta.env.VITE_SERVER_URL + 'users/', data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     await router.push('/admin/drivers');
   }
 }
@@ -62,10 +78,10 @@ const createNewDriver = async () => {
             <label for="drivingLicense" class="font-italic">Driving License</label>
             <input type="text" class="max-w-[200px]" name="" id="drivingLicense" v-model="drivingLicense">
           </div>
-          <div class="btn flex justify-center mb-5 align-left flex-col">
-            <label for="governmentId" class="font-italic">Government ID</label>
-            <input type="text" name="" id="governmentId" class="max-w-[200px]" v-model="governmentId">
-          </div>
+<!--          <div class="btn flex justify-center mb-5 align-left flex-col">-->
+<!--            <label for="governmentId" class="font-italic">Government ID</label>-->
+<!--            <input type="text" name="" id="governmentId" class="max-w-[200px]" v-model="governmentId">-->
+<!--          </div>-->
         </div>
         <div class="text-[18px] font-bold mb-3">Password</div>
         <div class="grid grid-cols-3 gap-x-16 mb-4">

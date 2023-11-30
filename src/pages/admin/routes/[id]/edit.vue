@@ -4,16 +4,6 @@ import { ref } from "vue"
 import { useRouter } from 'vue-router'
 
 const router = useRouter();
-const driver = {
-  id: 1,
-  email: "aidyn@gmail.com",
-  firstname: 'Aidyn',
-  lastname: 'Zhumaqadyr',
-  address: "22.412",
-  phone: '87085437222',
-  governmentId: '044037252',
-  drivingLicense: '123456789'
-}
 
 const goBack = async () => {
   await router.go(-1)

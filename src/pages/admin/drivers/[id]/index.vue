@@ -1,19 +1,43 @@
 <script lang="ts" setup>
 import adminBar from '@/components/adminBar.vue'
-import { ref } from "vue"
+import {onMounted, ref} from "vue"
 import { useRouter } from 'vue-router'
+import LoadingBar from "@/components/loadingBar.vue";
+import axios from "axios";
+import {DriversInterface} from "@/interfaces/drivers";
+import {CarsInterface} from "@/interfaces/cars";
+import CarItem from "@/components/carItem.vue";
 
 const router = useRouter();
-const driver = {
-  id: 1,
-  email: "aidyn@gmail.com",
-  firstname: 'Aidyn',
-  lastname: 'Zhumaqadyr',
-  address: "22.412",
-  phone: '87085437222',
-  governmentId: '044037252',
-  drivingLicense: '123456789'
-}
+const currentId = router.currentRoute.value.params.id;
+
+const isLoading = ref(true)
+const driver = ref(null as DriversInterface)
+
+const cars = ref(null as CarsInterface[])
+
+onMounted(async () => {
+  const res = await axios.get(import.meta.env.VITE_SERVER_URL + 'drivers/' + currentId, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+  driver.value = res.data as DriversInterface
+  isLoading.value = false
+  const res2 = await axios.get(import.meta.env.VITE_SERVER_URL + 'vehicles/all', {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+  cars.value = res2.data.content as CarsInterface[]
+  cars.value = cars.value.filter((car: CarsInterface) => {
+    if (car.driver?.id === +currentId) {
+      return car
+    }
+  })
+})
 
 const goBack = async () => {
   await router.go(-1)
@@ -23,15 +47,37 @@ const goBack = async () => {
 <template>
   <main class="w-full">
     <admin-bar></admin-bar>
-    <div class="rhs text-[black] px-[48px] py-[24px] w-full">
-      <div class="flex justify-center flex-col w-full">
+    <div class="rhs text-[black] px-[48px] py-[24px] w-full overflow-y-scroll scrollbar-none">
+      <loading-bar v-if="isLoading"/>
+      <div v-else class="flex justify-center flex-col w-full">
         <div class="mb-2">
           <button @click="goBack" class="flex align-center justify-center">
             <img src="@/assets/arrow-left.svg" alt="arrow-left">Back</button>
         </div>
         <div class="grid grid-cols-2 w-full rounded-[12px] border-black">
-          <div>asd</div>
-          <div>asd</div>
+          <div>
+            <h2 class="text-[36px]">Driver Info</h2>
+            <div class="flex flex-col gap-[4px]">
+              <img src="@/assets/profile.svg" class='bg-transparent w-[50%]'  alt="car">
+              <div>Username: {{ driver.user.username }}</div>
+              <div>First Name: {{ driver.user.firstName}}</div>
+              <div>Last Name: {{ driver.user.lastName }}</div>
+              <div>Email: {{ driver.user.email }}</div>
+              <div>Phone: {{ driver.user.phoneNumber }}</div>
+              <div>Rating: {{ driver.rating }}</div>
+              <div>Licence Number: {{ driver.licenseNumber }}</div>
+              <div v-if="!driver || !driver.user">No Driver</div>
+              <!--              <div v-else></div>-->
+              <!--      <button class="bg-transparent flex justify-end"><img src="@/assets/arrow-right.svg" class="w-6 h-6 bg-transparent" alt="right" @click="$router.push(`cars/${carData.id}`)"></button>-->
+            </div>
+          </div>
+          <div class="overflow-y-scroll scrollbar-none">
+            <h2 class="text-[36px]">Cars Info</h2>
+            <div v-if="cars.length < 1">No Vehicles Assigned</div>
+            <div v-for="car in cars" :key="car.id">
+              <car-item :car-data="car" />
+            </div>
+          </div>
         </div>
         <!--        <div class="text-[18px] font-bold mb-3">Driver {{ driver.id }} Data</div>-->
         <!--        <div class="flex flex-col overflow-x-scroll w-full gap-x-2">-->

@@ -2,6 +2,7 @@
 import adminBar from '@/components/adminBar.vue'
 import { ref } from "vue"
 import { useRouter } from 'vue-router'
+import axios from "axios";
 
 const router = useRouter();
 const email = ref('')
@@ -22,8 +23,30 @@ const createNewDriver = async () => {
     isError.value = true
     errorMessage.value = "Passwords Does not Match!"
   } else {
-    await router.push('/admin/drivers');
-  }
+    if (!password2.value || !password1.value || !firstname.value || !email.value || !lastname.value || !phone.value || !governmentId.value || !address.value || !drivingLicense.value) {
+      isError.value = true
+      errorMessage.value = "Fill All the Fields!"
+    } else if (password2.value !== password1.value) {
+      isError.value = true
+      errorMessage.value = "Passwords Does not Match!"
+    } else {
+      const data = {
+        username: username.value,
+        role: 'maintenance',
+        "firstName": firstname.value,
+        "lastName": lastname.value,
+        "email": email.value,
+        "phoneNumber": phone.value,
+        "password": password1.value
+      }
+      await axios.post(import.meta.env.VITE_SERVER_URL + 'users/', data, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+    await router.push('/admin/maintenance');
+  }}
 }
 </script>
 
@@ -32,7 +55,7 @@ const createNewDriver = async () => {
     <admin-bar></admin-bar>
     <div class="rhs text-[black] px-[48px] py-[24px] w-full">
       <div class="flex justify-center flex-col w-full">
-        <div class="text-[24px] font-bold mb-4">Create New Fueling Person</div>
+        <div class="text-[24px] font-bold mb-4">Create New Maintenance Person</div>
         <div class="text-[18px] font-bold mb-3">User Data</div>
         <div class="grid grid-cols-3 gap-x-16 mb-4">
           <div class="btn flex justify-center mb-5 align-left flex-col">
@@ -65,7 +88,7 @@ const createNewDriver = async () => {
         </div>
         <div class="">
           <div v-if="isError === true" class="text-red mb-2">{{ errorMessage }}</div>
-          <button @click='createNewDriver'>Create Fueling Person</button>
+          <button @click='createNewDriver'>Create Maintenance Person</button>
         </div>
       </div>
     </div>

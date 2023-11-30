@@ -2,6 +2,7 @@
 import adminBar from '@/components/adminBar.vue'
 import { ref } from "vue"
 import { useRouter } from 'vue-router'
+import axios from "axios";
 
 const router = useRouter();
 const email = ref('')
@@ -22,7 +23,31 @@ const createNewDriver = async () => {
     isError.value = true
     errorMessage.value = "Passwords Does not Match!"
   } else {
-    await router.push('/admin/drivers');
+
+    if (!password2.value || !password1.value || !firstname.value || !email.value || !lastname.value || !phone.value || !governmentId.value || !address.value || !drivingLicense.value) {
+      isError.value = true
+      errorMessage.value = "Fill All the Fields!"
+    } else if (password2.value !== password1.value) {
+      isError.value = true
+      errorMessage.value = "Passwords Does not Match!"
+    } else {
+      const data = {
+        username: username.value,
+        role: 'fuel',
+        "firstName": firstname.value,
+        "lastName": lastname.value,
+        "email": email.value,
+        "phoneNumber": phone.value,
+        "password": password1.value
+      }
+      await axios.post(import.meta.env.VITE_SERVER_URL + 'users/', data, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+     await router.push('/admin/drivers');
+    }
   }
 }
 </script>

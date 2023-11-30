@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import adminBar from '@/components/adminBar.vue'
+import axios from "axios";
 
 const username = ref('')
 const email = ref('')
@@ -16,10 +17,25 @@ const message = ref('')
 const updateContactInfo = () => {
 }
 
-const updatePassword = () => {
+const updatePassword = async () => {
   if (!password1.value || password1.value !== password2.value) {
     isError.value = true
     message .value = "Passwords does not match!"
+    return
+  }
+  const data = {
+    "newPassword": password1,
+    "confirmPassword": password1
+  }
+  try {
+    await axios.post(import.meta.env.VITE_SERVER_URL + 'users/password', data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  } catch(e) {
+    console.log("KETW!")
   }
 }
 </script>
@@ -58,7 +74,7 @@ const updatePassword = () => {
               <div class="grid grid-cols-3 gap-x-16 mb-4">
                 <div class="btn flex justify-center mb-5 align-left flex-col">
                   <label for="password1" class="font-italic mb-1">Password</label>
-                  <input type="password" name="" id="password1" class="max-w-[200px]" v-model="password1">
+                  <input type="password" name="current-password" id="password1" class="max-w-[200px]" v-model="password1">
                 </div>
                 <div class="btn flex justify-center mb-5 align-left flex-col">
                   <label for="password2" class="font-italic">Repeat Password</label>
